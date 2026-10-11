@@ -9,18 +9,39 @@
 </head>
 <body>
 
-    <header>
-        <h2>Obadah</h2>
+    
+<header class="site-header">
+    <div class="header-inner">
 
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
-            <a href="#skills">Skills</a>
-            <a href="#experience">Experience</a>
-        </nav>
-    </header>
+        <button
+            class="menu-toggle"
+            id="menu-toggle"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="site-nav">
+
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <a href="#home" class="site-brand">
+            <span class="brand-name">OBADAH ABUDOLEH</span>
+            <span class="brand-subtitle">Electrical Power Engineering</span>
+        </a>
+
+    </div>
+
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#cv">CV</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
 
     <main>
         
@@ -174,6 +195,8 @@
 </section>
 
 
+
+
 <section id="cv">
     <p class="eyebrow">MY RESUME</p>
     <h2>Want to Know More?</h2>
@@ -255,30 +278,98 @@
 </section>
 
        
+
 <section id="projects">
     <p class="eyebrow">WHAT I'VE BEEN WORKING ON</p>
     <h2>My Projects</h2>
     <p class="section-description">
-        A selection of projects where I've explored ideas
-        and put my skills into practice.
+        A selection of projects where I've applied my
+        engineering knowledge and technical skills.
     </p>
 
     <div class="project-grid">
 
+        <!-- PROJECT 01: Graduation Project -->
         <article class="project-card">
             <div class="project-number">PROJECT 01</div>
+            <span class="project-label">GRADUATION PROJECT</span>
+
+            <h3>Multi-Area Load Frequency Control</h3>
+
+            <p>
+                Modeled and analyzed Load Frequency Control (LFC)
+                to investigate frequency deviations and power
+                exchange in interconnected power systems following
+                load disturbances.
+            </p>
+
+            <h4>Key Objectives</h4>
+
+            <ul class="project-details">
+                <li>
+                    Studied single-area, two-area, and three-area
+                    power system configurations.
+                </li>
+                <li>
+                    Compared conventional integral control with
+                    advanced strategies, including LQR, LQG,
+                    Optimal Control, and IMC-PID.
+                </li>
+                <li>
+                    Developed a three-area LFC simulation in
+                    MATLAB/Simulink at a nominal frequency of 60 Hz.
+                </li>
+                <li>
+                    Analyzed system responses to a 200 MW load
+                    disturbance in Area 2 and calculated theoretical
+                    frequency deviations and mechanical power changes.
+                </li>
+            </ul>
+
+            <div class="project-tags">
+                <span>MATLAB</span>
+                <span>Simulink</span>
+                <span>Power Systems</span>
+                <span>Control Systems</span>
+                <span>LQR / LQG</span>
+            </div>
+
+            <div class="project-actions">
+                <a
+                    href="load-frequency-control.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="button button-primary">
+                    View Project Report ↗
+                </a>
+
+                <a
+                    href="load-frequency-control.pdf"
+                    download="Load-Frequency-Control-Report.pdf"
+                    class="button button-secondary">
+                    Download Report ↓
+                </a>
+            </div>
+        </article>
+
+        <!-- PROJECT 02: Personal Portfolio -->
+        <article class="project-card">
+            <div class="project-number">PROJECT 02</div>
 
             <h3>Personal Portfolio Website</h3>
 
             <p>
-                A personal website built from scratch to explore
-                web development, responsive design, and CSS styling.
+                Designed and developed a personal portfolio
+                website from scratch to showcase my engineering
+                background, professional experience, skills,
+                and projects using HTML and CSS.
             </p>
 
             <div class="project-tags">
                 <span>HTML</span>
                 <span>CSS</span>
-                <span>Learning</span>
+                <span>Responsive Design</span>
+                <span>GitHub Pages</span>
             </div>
 
             <a href="#contact" class="project-link">
@@ -292,6 +383,11 @@
         <section id="contact">
             <h2>Get In Touch</h2>
             <p>Email: obadahabudoleh11@gmail.com</p>
+            <button type="button" class="button button-primary" id="email-button">
+    Email Me
+</button>
+
+<span id="email-feedback" aria-live="polite"></span>
         </section>
     </main>
 
@@ -299,5 +395,50 @@
         <p>© 2026 Obadah Abudoleh</p>
     </footer>
 
+<script>
+    const menuToggle = document.getElementById("menu-toggle");
+    const siteNav = document.getElementById("site-nav");
+
+    menuToggle.addEventListener("click", function () {
+        const isOpen = siteNav.classList.toggle("open");
+
+        menuToggle.classList.toggle("active", isOpen);
+        menuToggle.setAttribute("aria-expanded", isOpen);
+        menuToggle.setAttribute(
+            "aria-label",
+            isOpen ? "Close navigation menu" : "Open navigation menu"
+        );
+    });
+
+    siteNav.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+            siteNav.classList.remove("open");
+            menuToggle.classList.remove("active");
+            menuToggle.setAttribute("aria-expanded", "false");
+            menuToggle.setAttribute(
+                "aria-label",
+                "Open navigation menu"
+            );
+        });
+    });
+    const emailButton = document.getElementById("email-button");
+const emailFeedback = document.getElementById("email-feedback");
+const emailAddress = "Obadahabudoleh11@gmail.com";
+
+emailButton.addEventListener("click", async function () {
+    try {
+        await navigator.clipboard.writeText(emailAddress);
+        emailButton.textContent = "Email Copied ✓";
+        emailFeedback.textContent = "Email copied to clipboard!";
+    } catch (error) {
+        emailFeedback.textContent =
+            "Copy failed. Email me at " + emailAddress;
+    }
+
+    setTimeout(function () {
+        emailButton.textContent = "Email Me";
+    }, 2000);
+});
+</script>
 </body>
 </html>
